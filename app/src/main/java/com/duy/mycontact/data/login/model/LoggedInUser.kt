@@ -5,5 +5,6 @@ package com.duy.mycontact.data.login.model
  */
 data class LoggedInUser(
     val userId: String,
+    val userName: String,
     val displayName: String
 )

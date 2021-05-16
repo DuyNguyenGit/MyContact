@@ -2,9 +2,9 @@ package com.duy.mycontact.di.modules
 
 import android.util.Log
 import com.duy.mycontact.BuildConfig
-import com.duy.mycontact.api.ContactApi
-import com.duy.mycontact.api.LoginApi
-import com.duy.mycontact.api.LoginApiImpl
+import com.duy.mycontact.data.api.ContactApi
+import com.duy.mycontact.data.api.LoginApi
+import com.duy.mycontact.data.api.LoginApiImpl
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

@@ -1,4 +1,4 @@
-package com.duy.mycontact.presentation.login.ui.login
+package com.duy.mycontact.presentation.login
 
 /**
  * Data validation state of the login form.

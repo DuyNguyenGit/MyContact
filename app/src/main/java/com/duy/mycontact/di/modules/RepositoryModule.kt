@@ -7,6 +7,7 @@ import com.duy.mycontact.data.login.LoginRepositoryImpl
 import com.duy.mycontact.domain.ContactDetailRepository
 import com.duy.mycontact.domain.ContactListRepository
 import com.duy.mycontact.domain.LoginRepository
+import com.duy.mycontact.presentation.contact_list.datasource.ContactListDataSourceFactory
 import org.koin.dsl.module
 
 
@@ -15,4 +16,5 @@ val repositoryModule = module {
     single<ContactListRepository> { ContactListRepositoryImpl(get()) }
     single<ContactDetailRepository> { ContactDetailRepositoryImpl(get()) }
     factory { LoginDataSource(get()) }
+    single { ContactListDataSourceFactory(get()) }
 }

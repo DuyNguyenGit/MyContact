@@ -1,4 +1,4 @@
-package com.duy.mycontact.presentation.login.ui.login
+package com.duy.mycontact.presentation.login
 
 /**
  * Authentication result : success (user details) or error message.

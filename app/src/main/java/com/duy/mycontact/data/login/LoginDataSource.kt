@@ -1,11 +1,9 @@
 package com.duy.mycontact.data.login
 
 import android.util.Log
-import com.duy.mycontact.api.ContactApi
-import com.duy.mycontact.api.LoginApi
+import com.duy.mycontact.data.api.LoginApi
 import com.duy.mycontact.data.login.model.LoggedInUser
 import java.io.IOException
-import java.util.*
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.

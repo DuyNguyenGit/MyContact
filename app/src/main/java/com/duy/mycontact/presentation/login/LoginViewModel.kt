@@ -1,4 +1,4 @@
-package com.duy.mycontact.presentation.login.ui.login
+package com.duy.mycontact.presentation.login
 
 import android.util.Log
 import android.util.Patterns
@@ -29,7 +29,15 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             val result = loginRepository.login(username, password)
 
             if (result is Result.Success) {
-                _loginResult.postValue(LoginResult(success = LoggedInUserView(displayName = result.data.displayName)))
+                _loginResult.postValue(
+                    LoginResult(
+                        success = LoggedInUserView(
+                            result.data.userId,
+                            result.data.userName,
+                            result.data.displayName
+                        )
+                    )
+                )
             } else {
                 _loginResult.postValue(LoginResult(error = R.string.login_failed))
             }

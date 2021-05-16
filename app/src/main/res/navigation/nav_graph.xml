@@ -6,7 +6,29 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.duy.mycontact.presentation.login.ui.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        android:name="com.duy.mycontact.presentation.login.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_contactListFragment"
+            app:destination="@id/contactListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactListFragment"
+        android:name="com.duy.mycontact.presentation.contact_list.ContactListFragment"
+        android:label="@string/contact_list"
+        tools:layout="@layout/fragment_contact_list" >
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="displayName"
+            app:argType="string" />
+    </fragment>
 </navigation>
