@@ -7,6 +7,6 @@ data class ContactListResponse(
     @SerializedName("page") val page: Int,
     @SerializedName("per_page") val per_page: Int,
     @SerializedName("support") val support: Support,
-    @SerializedName("total") val total: Int,
+    @SerializedName("total") val total: Long,
     @SerializedName("total_pages") val total_pages: Int
 )

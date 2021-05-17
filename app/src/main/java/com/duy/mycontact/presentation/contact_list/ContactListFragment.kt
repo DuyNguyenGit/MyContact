@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.duy.mycontact.MainActivity
 import com.duy.mycontact.R
 import com.duy.mycontact.data.contact_list.Contact
 import com.duy.mycontact.databinding.FragmentContactListBinding
@@ -40,6 +41,10 @@ class ContactListFragment : Fragment(), ContactListAdapter.ContactListAdapterInt
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.let {
+            val displayName = ContactListFragmentArgs.fromBundle(it).displayName
+            (requireActivity() as MainActivity).supportActionBar?.title = getString(R.string.welcome, displayName)
+        }
     }
 
     private fun initAdapterAndObserve() {
