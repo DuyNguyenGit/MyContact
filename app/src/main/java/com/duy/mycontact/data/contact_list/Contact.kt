@@ -1,9 +1,11 @@
 package com.duy.mycontact.data.contact_list
 
+import com.google.gson.annotations.SerializedName
+
 data class Contact(
-    val avatar: String,
-    val email: String,
-    val first_name: String,
-    val id: Int,
-    val last_name: String
+    @SerializedName("avatar") val avatar: String,
+    @SerializedName("email") val email: String,
+    @SerializedName("first_name") val first_name: String,
+    @SerializedName("id") val id: Int,
+    @SerializedName("last_name") val last_name: String
 )

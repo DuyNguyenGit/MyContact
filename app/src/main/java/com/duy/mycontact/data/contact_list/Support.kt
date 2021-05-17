@@ -1,6 +1,8 @@
 package com.duy.mycontact.data.contact_list
 
+import com.google.gson.annotations.SerializedName
+
 data class Support(
-    val text: String,
-    val url: String
+    @SerializedName("text") val text: String,
+    @SerializedName("url") val url: String
 )

@@ -16,7 +16,6 @@ class ContactListDataSource(private val contactListRepository: ContactListReposi
     private val dataSourceJob = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.Main + dataSourceJob)
     val loadStateLiveData: MutableLiveData<Status> = MutableLiveData()
-    val totalCount: MutableLiveData<Long> = MutableLiveData()
 
     companion object {
         const val PAGE_SIZE = 15
@@ -28,7 +27,6 @@ class ContactListDataSource(private val contactListRepository: ContactListReposi
     ) {
         scope.launch {
             loadStateLiveData.postValue(Status.LOADING)
-            totalCount.postValue(0)
 
             val response = contactListRepository.getContactList(1, PAGE_SIZE)
             when (response.status) {
@@ -38,7 +36,6 @@ class ContactListDataSource(private val contactListRepository: ContactListReposi
                     response.data?.let {
                         callback.onResult(it.contacts, null, 2)
                         loadStateLiveData.postValue(Status.SUCCESS)
-                        totalCount.postValue(it.total.toLong())
                     }
                 }
             }
