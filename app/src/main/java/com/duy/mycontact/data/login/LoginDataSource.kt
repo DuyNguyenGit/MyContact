@@ -2,6 +2,7 @@ package com.duy.mycontact.data.login
 
 import android.util.Log
 import com.duy.mycontact.data.api.LoginApi
+import com.duy.mycontact.data.base.Result
 import com.duy.mycontact.data.login.model.LoggedInUser
 import java.io.IOException
 

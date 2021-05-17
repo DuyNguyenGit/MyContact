@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.duy.mycontact.MainActivity
@@ -59,9 +60,9 @@ class ContactListFragment : Fragment(), ContactListAdapter.ContactListAdapterInt
     }
 
     override fun onUserItemClick(contact: Contact) {
-
-//        val direction =
-//            SearchFragmentDirections.actionSearchFragmentToUserDetailFragment(contact.id)
-//        findNavController().navigate(direction)
+        val direction =
+            ContactListFragmentDirections.actionContactListFragmentToContactInfoFragment(
+                contact.id, contact.first_name, contact.email)
+        findNavController().navigate(direction)
     }
 }

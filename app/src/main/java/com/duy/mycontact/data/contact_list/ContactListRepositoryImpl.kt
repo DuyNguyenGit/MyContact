@@ -1,4 +1,4 @@
-package com.duy.mycontact.data
+package com.duy.mycontact.data.contact_list
 
 import com.duy.mycontact.data.api.ContactApi
 import com.duy.mycontact.data.base.Resource

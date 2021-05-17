@@ -1,9 +1,9 @@
 package com.duy.mycontact.domain
 
-import com.duy.mycontact.data.base.Resource
 import com.duy.mycontact.data.common.Contact
+import com.duy.mycontact.data.base.Result
 
 interface ContactDetailRepository {
 
-    suspend fun getContactInfo(contactId: Int): Resource<Contact>
+    suspend fun getContactInfo(contactId: Int): Result<Contact>
 }

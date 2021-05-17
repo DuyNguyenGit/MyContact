@@ -1,7 +1,7 @@
 package com.duy.mycontact.di.modules
 
-import com.duy.mycontact.data.ContactDetailRepositoryImpl
-import com.duy.mycontact.data.ContactListRepositoryImpl
+import com.duy.mycontact.data.contact_info.ContactDetailRepositoryImpl
+import com.duy.mycontact.data.contact_list.ContactListRepositoryImpl
 import com.duy.mycontact.data.login.LoginDataSource
 import com.duy.mycontact.data.login.LoginRepositoryImpl
 import com.duy.mycontact.domain.ContactDetailRepository

@@ -1,9 +1,8 @@
 package com.duy.mycontact.data.login
 
+import com.duy.mycontact.data.base.Result
 import com.duy.mycontact.data.login.model.LoggedInUser
 import com.duy.mycontact.domain.LoginRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class LoginRepositoryImpl(private val dataSource: LoginDataSource) : LoginRepository {
     override suspend fun login(username: String, password: String): Result<LoggedInUser> {

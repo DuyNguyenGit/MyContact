@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.duy.mycontact.R
-import com.duy.mycontact.data.login.Result
+import com.duy.mycontact.data.base.Result
 import com.duy.mycontact.domain.LoginRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.duy.mycontact.data.login
+package com.duy.mycontact.data.base
 
 /**
  * A generic class that holds a value with its loading status.

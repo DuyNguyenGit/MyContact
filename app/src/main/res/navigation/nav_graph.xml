@@ -30,5 +30,26 @@
         <argument
             android:name="displayName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_contactListFragment_to_contactInfoFragment"
+            app:destination="@id/contactInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactInfoFragment"
+        android:name="com.duy.mycontact.presentation.contact_info.ContactInfoFragment"
+        android:label="ContactInfoFragment">
+        <argument
+            android:name="contactId"
+            app:argType="integer" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
     </fragment>
 </navigation>

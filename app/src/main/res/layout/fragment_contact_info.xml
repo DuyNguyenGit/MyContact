@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
-        <import type="android.text.TextUtils" />
 
         <variable
             name="contactInfoViewModel"
@@ -22,6 +19,7 @@
         android:paddingTop="@dimen/fragment_vertical_margin"
         android:paddingRight="@dimen/fragment_horizontal_margin"
         android:paddingBottom="@dimen/fragment_vertical_margin">
+
         <ImageView
             android:id="@+id/img_avatar"
             android:layout_width="@dimen/avatar_size_large"
@@ -29,10 +27,10 @@
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
             app:avatar="@{contactInfoViewModel.contactModel.avatar}"
-            tools:ignore="ContentDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <EditText
             android:id="@+id/edt_user_name"
@@ -63,30 +61,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edt_user_name" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:onClick="@{() -> contactInfoViewModel.updateContactInfo()}"
-            android:padding="@dimen/normal_margin"
-            android:text="@string/btn_update"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progress_bar"/>
-
         <Button
             android:id="@+id/btn_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/normal_margin"
-            android:onClick="@{() -> contactInfoViewModel.updateContactInfo()}"
             android:padding="@dimen/normal_margin"
             android:text="@string/btn_update"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="50dp"
@@ -94,8 +80,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edt_email"
-            android:visibility="@{safeUnbox(contactInfoViewModel.isWaiting) ? View.VISIBLE : View.GONE}" />
+            app:layout_constraintTop_toBottomOf="@+id/edt_email" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
