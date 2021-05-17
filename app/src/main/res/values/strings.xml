@@ -13,4 +13,6 @@
     <string name="contact_list">Welcome %1$s</string>
     <string name="msg_contact_list_is_empty">Empty!</string>
     <string name="msg_fetch_contact_list_has_error">Has Error!</string>
+    <string name="btn_update">Update</string>
+    <string name="prompt_user_name">User name</string>
 </resources>

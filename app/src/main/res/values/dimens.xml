@@ -5,4 +5,11 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="row_item_margin_vertical">12dp</dimen>
     <dimen name="row_item_margin_horizontal">12dp</dimen>
+
+    <dimen name="large_margin">32dp</dimen>
+    <dimen name="normal_margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+
+    <dimen name="avatar_size">64dp</dimen>
+    <dimen name="avatar_size_large">128dp</dimen>
 </resources>

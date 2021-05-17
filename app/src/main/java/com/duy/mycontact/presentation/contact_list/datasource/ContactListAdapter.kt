@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.duy.mycontact.R
-import com.duy.mycontact.data.contact_list.Contact
+import com.duy.mycontact.data.common.Contact
 
 class ContactListAdapter(private val listener: ContactListAdapterInteraction) :
     PagedListAdapter<Contact, ContactListAdapter.ContactListViewHolder>(contactDiffCallback) {

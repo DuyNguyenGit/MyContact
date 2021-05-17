@@ -3,7 +3,7 @@ package com.duy.mycontact.presentation.contact_list.datasource
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.duy.mycontact.data.base.Status
-import com.duy.mycontact.data.contact_list.Contact
+import com.duy.mycontact.data.common.Contact
 import com.duy.mycontact.domain.ContactListRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

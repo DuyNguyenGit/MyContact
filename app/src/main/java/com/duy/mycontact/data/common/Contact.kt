@@ -1,4 +1,4 @@
-package com.duy.mycontact.data.contact_list
+package com.duy.mycontact.data.common
 
 import com.google.gson.annotations.SerializedName
 

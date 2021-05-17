@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.duy.mycontact.MainActivity
 import com.duy.mycontact.R
-import com.duy.mycontact.data.contact_list.Contact
+import com.duy.mycontact.data.common.Contact
 import com.duy.mycontact.databinding.FragmentContactListBinding
 import com.duy.mycontact.presentation.contact_list.datasource.ContactListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel

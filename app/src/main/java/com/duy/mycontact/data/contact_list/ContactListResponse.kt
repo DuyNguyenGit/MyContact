@@ -1,5 +1,7 @@
 package com.duy.mycontact.data.contact_list
 
+import com.duy.mycontact.data.common.Contact
+import com.duy.mycontact.data.common.Support
 import com.google.gson.annotations.SerializedName
 
 data class ContactListResponse(

@@ -5,7 +5,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.duy.mycontact.R
 import com.duy.mycontact.data.base.Status
-import com.duy.mycontact.data.contact_list.Contact
+import com.duy.mycontact.data.common.Contact
 import com.duy.mycontact.presentation.contact_list.datasource.ContactListDataSource
 import com.duy.mycontact.presentation.contact_list.datasource.ContactListDataSourceFactory
 import java.util.concurrent.Executors
