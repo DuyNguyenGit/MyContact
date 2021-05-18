@@ -21,4 +21,6 @@
     <string name="title_failed">Error!</string>
     <string name="message_failed">There is somethings went wrong.</string>
     <string name="ok">OK</string>
+    <string name="menu_filter_by_name">Filter by name</string>
+    <string name="retry">Retry</string>
 </resources>

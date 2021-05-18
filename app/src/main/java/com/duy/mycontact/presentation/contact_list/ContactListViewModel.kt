@@ -10,6 +10,9 @@ import com.duy.mycontact.presentation.contact_list.datasource.ContactListDataSou
 import com.duy.mycontact.presentation.contact_list.datasource.ContactListDataSourceFactory
 import java.util.concurrent.Executors
 
+const val FILTER_QUERY = "janet.weaver@reqres.in"
+const val NOT_FILTERED_QUERY = ""
+
 class ContactListViewModel(private val contactListDataSourceFactory: ContactListDataSourceFactory) :
     ViewModel() {
     private val TAG = ContactListViewModel::class.java.simpleName
@@ -18,12 +21,14 @@ class ContactListViewModel(private val contactListDataSourceFactory: ContactList
     private val _isWaiting: MutableLiveData<Boolean> = MutableLiveData()
     val isWaiting: LiveData<Boolean> = _isWaiting
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
+    var currentQuery: String = ""
 
     init {
         _isWaiting.value = true
         errorMessage.value = null
         dataSource = contactListDataSourceFactory.source
         initUsersListFactory()
+        filter(NOT_FILTERED_QUERY)
     }
 
     private fun initUsersListFactory() {
@@ -65,4 +70,19 @@ class ContactListViewModel(private val contactListDataSourceFactory: ContactList
                 }
             })
     }
+
+    fun retry() {
+        filter(currentQuery)
+    }
+
+    fun filter(query: String) {
+        contactListDataSourceFactory.updateQuery(query)
+    }
+
+    fun updateQuery() {
+        currentQuery = if (isFiltered()) NOT_FILTERED_QUERY else FILTER_QUERY
+        filter(currentQuery)
+    }
+
+    fun isFiltered() = currentQuery.isNotEmpty()
 }

@@ -1,16 +1,14 @@
 package com.duy.mycontact.presentation.login
 
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -18,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.duy.mycontact.MainActivity
 import com.duy.mycontact.R
+import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
@@ -40,30 +39,25 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as MainActivity).supportActionBar?.title = getString(R.string.login)
-        Log.d(TAG, "onViewCreated: >>>")
-        val usernameEditText = view.findViewById<EditText>(R.id.username)
-        val passwordEditText = view.findViewById<EditText>(R.id.password)
-        val loginButton = view.findViewById<Button>(R.id.login)
-        val loadingProgressBar = view.findViewById<ProgressBar>(R.id.loading)
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
                 if (loginFormState == null) {
                     return@Observer
                 }
-                loginButton.isEnabled = loginFormState.isDataValid
+                login.isEnabled = loginFormState.isDataValid
                 loginFormState.usernameError?.let {
-                    usernameEditText.error = getString(it)
+                    username.error = getString(it)
                 }
                 loginFormState.passwordError?.let {
-                    passwordEditText.error = getString(it)
+                    password.error = getString(it)
                 }
             })
 
         loginViewModel.loginResult.observe(viewLifecycleOwner,
             Observer { loginResult ->
                 loginResult ?: return@Observer
-                loadingProgressBar.visibility = View.GONE
+                loading.visibility = View.GONE
                 loginResult.error?.let {
                     showLoginFailed(it)
                 }
@@ -83,34 +77,52 @@ class LoginFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 loginViewModel.loginDataChanged(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    username.text.toString(),
+                    password.text.toString()
                 )
             }
         }
-        usernameEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.addTextChangedListener(afterTextChangedListener)
-        passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+        username.addTextChangedListener(afterTextChangedListener)
+        password.addTextChangedListener(afterTextChangedListener)
+        password.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.login(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    username.text.toString(),
+                    password.text.toString()
                 )
             }
             false
         }
 
-        loginButton.setOnClickListener {
-            loadingProgressBar.visibility = View.VISIBLE
+        login.setOnClickListener {
+            loading.visibility = View.VISIBLE
             loginViewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
+                username.text.toString(),
+                password.text.toString()
             )
+        }
+
+        img_view_password.setOnClickListener {
+            val bmap = (img_view_password.drawable.current as BitmapDrawable).bitmap
+
+            val imgShowPassWord = resources.getDrawable(R.drawable.pw_view_blue)
+            val showPassWord = (imgShowPassWord as BitmapDrawable).bitmap
+
+            if (bmap.sameAs(showPassWord)) {
+                img_view_password.setImageResource(R.drawable.pw_hide_blue)
+                password.transformationMethod = null
+            } else {
+                img_view_password.setImageResource(R.drawable.pw_view_blue)
+                password.transformationMethod = PasswordTransformationMethod()
+            }
         }
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
-        val direction = LoginFragmentDirections.actionLoginFragmentToContactListFragment(model.userId, model.displayName)
+        val direction = LoginFragmentDirections.actionLoginFragmentToContactListFragment(
+            model.userId,
+            model.displayName
+        )
         findNavController().navigate(direction)
     }
 

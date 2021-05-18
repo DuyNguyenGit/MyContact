@@ -8,7 +8,7 @@ import androidx.appcompat.widget.SearchView
 
 fun TextView.setResError(resError: Int?) {
     resError?.let {
-        error = context.resources.getString(it)
+        error = "Has Error! Please check connection and retry"
     } ?: setError(null)
 }
 

@@ -7,12 +7,20 @@ import com.duy.mycontact.domain.ContactListRepository
 
 class ContactListDataSourceFactory(private val contactListRepository: ContactListRepository) :
     DataSource.Factory<Int, Contact>() {
+    private var query: String = ""
     val source: MutableLiveData<ContactListDataSource> = MutableLiveData()
 
     override fun create(): DataSource<Int, Contact> {
-        val contactListDataSource = ContactListDataSource(contactListRepository)
+        val contactListDataSource = ContactListDataSource(contactListRepository, query)
         source.postValue(contactListDataSource)
         return contactListDataSource
+    }
+
+    fun getSource() = source.value
+
+    fun updateQuery(query: String){
+        this.query = query
+        getSource()?.refresh()
     }
 
 }

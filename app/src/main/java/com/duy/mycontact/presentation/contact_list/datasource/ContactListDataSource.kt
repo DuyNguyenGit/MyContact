@@ -5,12 +5,12 @@ import androidx.paging.PageKeyedDataSource
 import com.duy.mycontact.data.base.Status
 import com.duy.mycontact.data.common.Contact
 import com.duy.mycontact.domain.ContactListRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
-class ContactListDataSource(private val contactListRepository: ContactListRepository) :
+class ContactListDataSource(
+    private val contactListRepository: ContactListRepository,
+    private val query: String
+) :
     PageKeyedDataSource<Int, Contact>() {
 
     private val dataSourceJob = SupervisorJob()
@@ -34,7 +34,7 @@ class ContactListDataSource(private val contactListRepository: ContactListReposi
                 Status.EMPTY -> loadStateLiveData.postValue(Status.EMPTY)
                 else -> {
                     response.data?.let {
-                        callback.onResult(it.contacts, null, 2)
+                        callback.onResult(it.contacts.filterByQuery(query), null, 2)
                         loadStateLiveData.postValue(Status.SUCCESS)
                     }
                 }
@@ -46,12 +46,28 @@ class ContactListDataSource(private val contactListRepository: ContactListReposi
         scope.launch {
             val response = contactListRepository.getContactList(params.key, PAGE_SIZE)
             response.data?.let {
-                callback.onResult(it.contacts, params.key + 1)
+                callback.onResult(it.contacts.filterByQuery(query), params.key + 1)
             }
         }
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Contact>) {
 
+    }
+
+    private fun List<Contact>.filterByQuery(query: String): List<Contact> {
+        if (query.isNotEmpty()) {
+            return filter {
+                query == it.email
+            }
+        }
+        return this
+    }
+
+    fun refresh() = this.invalidate()
+
+    override fun invalidate() {
+        super.invalidate()
+        dataSourceJob.cancelChildren()   // Cancel possible running job to only keep last result searched by user
     }
 }

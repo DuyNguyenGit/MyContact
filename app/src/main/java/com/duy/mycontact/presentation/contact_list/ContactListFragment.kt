@@ -1,9 +1,7 @@
 package com.duy.mycontact.presentation.contact_list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -36,7 +34,7 @@ class ContactListFragment : Fragment(), ContactListAdapter.ContactListAdapterInt
         binding.lifecycleOwner = this
         itemViewer = binding.root.findViewById(R.id.recycler_view)
         initAdapterAndObserve()
-
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -44,8 +42,27 @@ class ContactListFragment : Fragment(), ContactListAdapter.ContactListAdapterInt
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             val displayName = ContactListFragmentArgs.fromBundle(it).displayName
-            (requireActivity() as MainActivity).supportActionBar?.title = getString(R.string.welcome, displayName)
+            (requireActivity() as MainActivity).supportActionBar?.title =
+                getString(R.string.welcome, displayName)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_filter, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.filter_name -> {
+                updateData()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun updateData() {
+        contactListViewModel.updateQuery()
     }
 
     private fun initAdapterAndObserve() {
@@ -62,7 +79,8 @@ class ContactListFragment : Fragment(), ContactListAdapter.ContactListAdapterInt
     override fun onUserItemClick(contact: Contact) {
         val direction =
             ContactListFragmentDirections.actionContactListFragmentToContactInfoFragment(
-                contact.id, contact.first_name, contact.email)
+                contact.id, contact.first_name, contact.email
+            )
         findNavController().navigate(direction)
     }
 }

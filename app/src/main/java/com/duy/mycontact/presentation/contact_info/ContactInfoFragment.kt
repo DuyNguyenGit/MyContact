@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.duy.mycontact.MainActivity
@@ -69,6 +70,7 @@ class ContactInfoFragment : Fragment() {
                             getString(R.string.ok)
                         ) { _: DialogInterface, _: Int ->
                             dismiss()
+                            findNavController().navigateUp()
                         }
                         show()
                     }

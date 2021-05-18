@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.duy.mycontact.presentation.login.LoginFragment"
-        android:label="@string/login"
+        android:label="login_fragment"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_contactListFragment"
@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/contactListFragment"
         android:name="com.duy.mycontact.presentation.contact_list.ContactListFragment"
-        android:label="@string/contact_list"
+        android:label="contact_list_fragment"
         tools:layout="@layout/fragment_contact_list" >
         <argument
             android:name="userId"
@@ -36,7 +36,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/contactInfoFragment"
