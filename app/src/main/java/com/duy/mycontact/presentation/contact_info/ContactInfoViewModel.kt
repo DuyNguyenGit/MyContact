@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.duy.mycontact.data.base.Result
 import com.duy.mycontact.data.common.Contact
+import com.duy.mycontact.data.contact_info.ContactUpdateData
 import com.duy.mycontact.domain.ContactDetailRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,10 +22,11 @@ class ContactInfoViewModel(private val contactDetailRepository: ContactDetailRep
     val errorMessage: LiveData<String> get() = _errorMessage
     private val _contactModel: MutableLiveData<Contact> = MutableLiveData()
     val contactModel: LiveData<Contact> get() = _contactModel
+    private val _contactUpdateModel: MutableLiveData<ContactUpdateData> = MutableLiveData()
+    val contactUpdateModel: LiveData<ContactUpdateData> get() = _contactUpdateModel
 
     init {
         _isWaiting.value = true
-        _errorMessage.value = null
     }
 
     fun getContactInfo(contactId: Int) {
@@ -46,11 +48,23 @@ class ContactInfoViewModel(private val contactDetailRepository: ContactDetailRep
         }
     }
 
-    fun updateContactInfo(contactId: Int?, userName: String, email: String) {
+    fun updateContactInfo(contactId: Int?, name: String, email: String) {
         _isWaiting.value = true
         viewModelScope.launch {
             contactId?.let { contactId ->
+                val result = contactDetailRepository.updateContactInfo(contactId, ContactUpdateData(name, email))
+                if (result is Result.Success) {
+                    Log.d(TAG, "getContactInfo: >>>SUCCESS")
+                    _contactUpdateModel.value = result.data
+                    _errorMessage.value = null
+                } else {
+                    Log.d(TAG, "getContactInfo: >>>ERROR: ${(result as Result.Error).exception.localizedMessage}")
+                    _contactUpdateModel.value = null
+                    _errorMessage.value = result.exception.localizedMessage
+                }
 
+                Log.d(TAG, "getContactInfo: >>END")
+                _isWaiting.value = false
             }
         }
     }

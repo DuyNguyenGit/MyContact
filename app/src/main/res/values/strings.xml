@@ -16,4 +16,9 @@
     <string name="btn_update">Update</string>
     <string name="prompt_user_name">User name</string>
     <string name="contact">Contact</string>
+    <string name="update_result_title_success">Success!</string>
+    <string name="update_result_message_success">Your contact has been updated successfully</string>
+    <string name="title_failed">Error!</string>
+    <string name="message_failed">There is somethings went wrong.</string>
+    <string name="ok">OK</string>
 </resources>

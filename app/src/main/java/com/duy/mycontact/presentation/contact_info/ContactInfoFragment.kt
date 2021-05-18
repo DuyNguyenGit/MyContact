@@ -1,10 +1,11 @@
 package com.duy.mycontact.presentation.contact_info
 
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -57,8 +58,40 @@ class ContactInfoFragment : Fragment() {
                 .apply(RequestOptions.circleCropTransform())
                 .into(img_avatar)
         })
+        contactInfoViewModel.contactUpdateModel.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                AlertDialog.Builder(requireActivity()).create()
+                    .apply {
+                        setTitle(getString(R.string.update_result_title_success))
+                        setMessage(getString(R.string.update_result_message_success))
+                        setButton(
+                            AlertDialog.BUTTON_POSITIVE,
+                            getString(R.string.ok)
+                        ) { _: DialogInterface, _: Int ->
+                            dismiss()
+                        }
+                        show()
+                    }
+            }
+        })
+        contactInfoViewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                AlertDialog.Builder(requireActivity()).create()
+                    .apply {
+                        setTitle(getString(R.string.title_failed))
+                        setMessage(getString(R.string.message_failed))
+                        setButton(
+                            AlertDialog.BUTTON_POSITIVE,
+                            getString(R.string.ok)
+                        ) { _: DialogInterface, _: Int ->
+                            dismiss()
+                        }
+                        show()
+                    }
+            }
+        })
         contactInfoViewModel.isWaiting.observe(viewLifecycleOwner, Observer {
-            progress_bar.visibility = if(it) View.VISIBLE else View.GONE
+            progress_bar.visibility = if (it) View.VISIBLE else View.GONE
             btn_update.isEnabled = !it
         })
     }

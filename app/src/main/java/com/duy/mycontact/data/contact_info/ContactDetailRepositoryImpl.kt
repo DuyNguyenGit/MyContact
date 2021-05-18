@@ -26,4 +26,24 @@ class ContactDetailRepositoryImpl(private val contactApi: ContactApi) : ContactD
         }
 
     }
+
+    override suspend fun updateContactInfo(
+        contactId: Int,
+        data: ContactUpdateData
+    ): Result<ContactUpdateData> {
+        var result: Result<ContactUpdateData>?
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = contactApi.updateContactInfo(contactId.toString(), data)
+                if (response.isSuccessful) {
+                    result = Result.Success(response.body() as ContactUpdateData)
+                } else {
+                    result = Result.Error(IOException(response.message()))
+                }
+            } catch (ex: Throwable) {
+                result = Result.Error(IOException(ex.message))
+            }
+            result!!
+        }
+    }
 }
